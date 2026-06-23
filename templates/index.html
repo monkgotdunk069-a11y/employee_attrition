@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee Attrition Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Employee Attrition Prediction System</h1>
+
+<form action="/predict" method="POST">
+
+<div class="grid">
+
+<select name="BusinessTravel">
+<option value="Travel_Rarely">Travel Rarely</option>
+<option value="Travel_Frequently">Travel Frequently</option>
+<option value="Non-Travel">Non Travel</option>
+</select>
+
+<input type="number" name="DailyRate" placeholder="Daily Rate" required>
+
+<select name="Department">
+<option value="Sales">Sales</option>
+<option value="Research & Development">Research & Development</option>
+<option value="Human Resources">Human Resources</option>
+</select>
+
+<input type="number" name="DistanceFromHome" placeholder="Distance From Home" required>
+
+<input type="number" name="Education" placeholder="Education (1-5)" required>
+
+<select name="EducationField">
+<option value="Life Sciences">Life Sciences</option>
+<option value="Medical">Medical</option>
+<option value="Marketing">Marketing</option>
+<option value="Technical Degree">Technical Degree</option>
+<option value="Human Resources">Human Resources</option>
+<option value="Other">Other</option>
+</select>
+
+<input type="number" name="EnvironmentSatisfaction" placeholder="Environment Satisfaction" required>
+
+<select name="Gender">
+<option value="Male">Male</option>
+<option value="Female">Female</option>
+</select>
+
+<input type="number" name="HourlyRate" placeholder="Hourly Rate" required>
+<input type="number" name="JobInvolvement" placeholder="Job Involvement" required>
+<input type="number" name="JobLevel" placeholder="Job Level" required>
+
+<select name="JobRole">
+<option value="Sales Executive">Sales Executive</option>
+<option value="Research Scientist">Research Scientist</option>
+<option value="Laboratory Technician">Laboratory Technician</option>
+<option value="Manufacturing Director">Manufacturing Director</option>
+<option value="Healthcare Representative">Healthcare Representative</option>
+<option value="Manager">Manager</option>
+<option value="Sales Representative">Sales Representative</option>
+<option value="Research Director">Research Director</option>
+<option value="Human Resources">Human Resources</option>
+</select>
+
+<input type="number" name="JobSatisfaction" placeholder="Job Satisfaction" required>
+
+<select name="MaritalStatus">
+<option value="Single">Single</option>
+<option value="Married">Married</option>
+<option value="Divorced">Divorced</option>
+</select>
+
+<input type="number" name="MonthlyIncome" placeholder="Monthly Income" required>
+<input type="number" name="MonthlyRate" placeholder="Monthly Rate" required>
+<input type="number" name="NumCompaniesWorked" placeholder="Companies Worked" required>
+
+<select name="OverTime">
+<option value="Yes">Yes</option>
+<option value="No">No</option>
+</select>
+
+<input type="number" name="PercentSalaryHike" placeholder="Salary Hike %" required>
+<input type="number" name="PerformanceRating" placeholder="Performance Rating" required>
+<input type="number" name="RelationshipSatisfaction" placeholder="Relationship Satisfaction" required>
+<input type="number" name="StockOptionLevel" placeholder="Stock Option Level" required>
+<input type="number" name="TotalWorkingYears" placeholder="Total Working Years" required>
+<input type="number" name="TrainingTimesLastYear" placeholder="Training Times Last Year" required>
+<input type="number" name="WorkLifeBalance" placeholder="Work Life Balance" required>
+<input type="number" name="YearsAtCompany" placeholder="Years At Company" required>
+<input type="number" name="YearsInCurrentRole" placeholder="Years In Current Role" required>
+<input type="number" name="YearsSinceLastPromotion" placeholder="Years Since Last Promotion" required>
+<input type="number" name="YearsWithCurrManager" placeholder="Years With Current Manager" required>
+
+</div>
+
+<button type="submit">Predict Attrition</button>
+
+</form>
+
+{% if prediction %}
+<div class="result">
+<h2>{{ prediction }}</h2>
+</div>
+{% endif %}
+
+</div>
+
+</body>
+</html>
