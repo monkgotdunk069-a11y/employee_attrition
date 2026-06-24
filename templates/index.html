@@ -1,112 +1,272 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Employee Attrition Prediction</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta name="description" content="Predict employee attrition risk using key HR metrics." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
 </head>
 
 <body>
 
-<div class="container">
+    <div class="page">
 
-<h1>Employee Attrition Prediction System</h1>
+        <header class="page-header">
+            <h1>Attrition Predictor</h1>
+            <p>Fill in the employee details below to assess attrition risk.</p>
+        </header>
 
-<form action="/predict" method="POST">
+        <form class="card" action="/predict" method="POST">
 
-<div class="grid">
+            <section class="form-section">
+                <h2 class="section-title">Personal</h2>
+                <div class="grid">
 
-<select name="BusinessTravel">
-<option value="Travel_Rarely">Travel Rarely</option>
-<option value="Travel_Frequently">Travel Frequently</option>
-<option value="Non-Travel">Non Travel</option>
-</select>
+                    <div class="field">
+                        <label for="Gender">Gender</label>
+                        <select id="Gender" name="Gender">
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
 
-<input type="number" name="DailyRate" placeholder="Daily Rate" required>
+                    <div class="field">
+                        <label for="MaritalStatus">Marital Status</label>
+                        <select id="MaritalStatus" name="MaritalStatus">
+                            <option value="Single">Single</option>
+                            <option value="Married">Married</option>
+                            <option value="Divorced">Divorced</option>
+                        </select>
+                    </div>
 
-<select name="Department">
-<option value="Sales">Sales</option>
-<option value="Research & Development">Research & Development</option>
-<option value="Human Resources">Human Resources</option>
-</select>
+                    <div class="field">
+                        <label for="Education">Education <span class="hint">(1–5)</span></label>
+                        <input type="number" id="Education" name="Education" min="1" max="5" placeholder="1–5"
+                            required />
+                    </div>
 
-<input type="number" name="DistanceFromHome" placeholder="Distance From Home" required>
+                    <div class="field">
+                        <label for="EducationField">Education Field</label>
+                        <select id="EducationField" name="EducationField">
+                            <option value="Life Sciences">Life Sciences</option>
+                            <option value="Medical">Medical</option>
+                            <option value="Marketing">Marketing</option>
+                            <option value="Technical Degree">Technical Degree</option>
+                            <option value="Human Resources">Human Resources</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
 
-<input type="number" name="Education" placeholder="Education (1-5)" required>
+                    <div class="field">
+                        <label for="DistanceFromHome">Distance From Home <span class="hint">(km)</span></label>
+                        <input type="number" id="DistanceFromHome" name="DistanceFromHome" min="0" placeholder="e.g. 10"
+                            required />
+                    </div>
 
-<select name="EducationField">
-<option value="Life Sciences">Life Sciences</option>
-<option value="Medical">Medical</option>
-<option value="Marketing">Marketing</option>
-<option value="Technical Degree">Technical Degree</option>
-<option value="Human Resources">Human Resources</option>
-<option value="Other">Other</option>
-</select>
+                </div>
+            </section>
 
-<input type="number" name="EnvironmentSatisfaction" placeholder="Environment Satisfaction" required>
+            <section class="form-section">
+                <h2 class="section-title">Job</h2>
+                <div class="grid">
 
-<select name="Gender">
-<option value="Male">Male</option>
-<option value="Female">Female</option>
-</select>
+                    <div class="field">
+                        <label for="Department">Department</label>
+                        <select id="Department" name="Department">
+                            <option value="Sales">Sales</option>
+                            <option value="Research &amp; Development">Research &amp; Development</option>
+                            <option value="Human Resources">Human Resources</option>
+                        </select>
+                    </div>
 
-<input type="number" name="HourlyRate" placeholder="Hourly Rate" required>
-<input type="number" name="JobInvolvement" placeholder="Job Involvement" required>
-<input type="number" name="JobLevel" placeholder="Job Level" required>
+                    <div class="field">
+                        <label for="JobRole">Job Role</label>
+                        <select id="JobRole" name="JobRole">
+                            <option value="Sales Executive">Sales Executive</option>
+                            <option value="Research Scientist">Research Scientist</option>
+                            <option value="Laboratory Technician">Laboratory Technician</option>
+                            <option value="Manufacturing Director">Manufacturing Director</option>
+                            <option value="Healthcare Representative">Healthcare Representative</option>
+                            <option value="Manager">Manager</option>
+                            <option value="Sales Representative">Sales Representative</option>
+                            <option value="Research Director">Research Director</option>
+                            <option value="Human Resources">Human Resources</option>
+                        </select>
+                    </div>
 
-<select name="JobRole">
-<option value="Sales Executive">Sales Executive</option>
-<option value="Research Scientist">Research Scientist</option>
-<option value="Laboratory Technician">Laboratory Technician</option>
-<option value="Manufacturing Director">Manufacturing Director</option>
-<option value="Healthcare Representative">Healthcare Representative</option>
-<option value="Manager">Manager</option>
-<option value="Sales Representative">Sales Representative</option>
-<option value="Research Director">Research Director</option>
-<option value="Human Resources">Human Resources</option>
-</select>
+                    <div class="field">
+                        <label for="JobLevel">Job Level</label>
+                        <input type="number" id="JobLevel" name="JobLevel" min="1" max="5" placeholder="1–5" required />
+                    </div>
 
-<input type="number" name="JobSatisfaction" placeholder="Job Satisfaction" required>
+                    <div class="field">
+                        <label for="BusinessTravel">Business Travel</label>
+                        <select id="BusinessTravel" name="BusinessTravel">
+                            <option value="Travel_Rarely">Travel Rarely</option>
+                            <option value="Travel_Frequently">Travel Frequently</option>
+                            <option value="Non-Travel">Non Travel</option>
+                        </select>
+                    </div>
 
-<select name="MaritalStatus">
-<option value="Single">Single</option>
-<option value="Married">Married</option>
-<option value="Divorced">Divorced</option>
-</select>
+                    <div class="field">
+                        <label for="OverTime">Overtime</label>
+                        <select id="OverTime" name="OverTime">
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
 
-<input type="number" name="MonthlyIncome" placeholder="Monthly Income" required>
-<input type="number" name="MonthlyRate" placeholder="Monthly Rate" required>
-<input type="number" name="NumCompaniesWorked" placeholder="Companies Worked" required>
+                    <div class="field">
+                        <label for="JobInvolvement">Job Involvement <span class="hint">(1–4)</span></label>
+                        <input type="number" id="JobInvolvement" name="JobInvolvement" min="1" max="4" placeholder="1–4"
+                            required />
+                    </div>
 
-<select name="OverTime">
-<option value="Yes">Yes</option>
-<option value="No">No</option>
-</select>
+                    <div class="field">
+                        <label for="JobSatisfaction">Job Satisfaction <span class="hint">(1–4)</span></label>
+                        <input type="number" id="JobSatisfaction" name="JobSatisfaction" min="1" max="4"
+                            placeholder="1–4" required />
+                    </div>
 
-<input type="number" name="PercentSalaryHike" placeholder="Salary Hike %" required>
-<input type="number" name="PerformanceRating" placeholder="Performance Rating" required>
-<input type="number" name="RelationshipSatisfaction" placeholder="Relationship Satisfaction" required>
-<input type="number" name="StockOptionLevel" placeholder="Stock Option Level" required>
-<input type="number" name="TotalWorkingYears" placeholder="Total Working Years" required>
-<input type="number" name="TrainingTimesLastYear" placeholder="Training Times Last Year" required>
-<input type="number" name="WorkLifeBalance" placeholder="Work Life Balance" required>
-<input type="number" name="YearsAtCompany" placeholder="Years At Company" required>
-<input type="number" name="YearsInCurrentRole" placeholder="Years In Current Role" required>
-<input type="number" name="YearsSinceLastPromotion" placeholder="Years Since Last Promotion" required>
-<input type="number" name="YearsWithCurrManager" placeholder="Years With Current Manager" required>
+                    <div class="field">
+                        <label for="EnvironmentSatisfaction">Environment Satisfaction <span
+                                class="hint">(1–4)</span></label>
+                        <input type="number" id="EnvironmentSatisfaction" name="EnvironmentSatisfaction" min="1" max="4"
+                            placeholder="1–4" required />
+                    </div>
 
-</div>
+                    <div class="field">
+                        <label for="WorkLifeBalance">Work-Life Balance <span class="hint">(1–4)</span></label>
+                        <input type="number" id="WorkLifeBalance" name="WorkLifeBalance" min="1" max="4"
+                            placeholder="1–4" required />
+                    </div>
 
-<button type="submit">Predict Attrition</button>
+                    <div class="field">
+                        <label for="RelationshipSatisfaction">Relationship Satisfaction <span
+                                class="hint">(1–4)</span></label>
+                        <input type="number" id="RelationshipSatisfaction" name="RelationshipSatisfaction" min="1"
+                            max="4" placeholder="1–4" required />
+                    </div>
 
-</form>
+                    <div class="field">
+                        <label for="PerformanceRating">Performance Rating <span class="hint">(1–4)</span></label>
+                        <input type="number" id="PerformanceRating" name="PerformanceRating" min="1" max="4"
+                            placeholder="1–4" required />
+                    </div>
 
-{% if prediction %}
-<div class="result">
-<h2>{{ prediction }}</h2>
-</div>
-{% endif %}
+                    <div class="field">
+                        <label for="StockOptionLevel">Stock Option Level <span class="hint">(0–3)</span></label>
+                        <input type="number" id="StockOptionLevel" name="StockOptionLevel" min="0" max="3"
+                            placeholder="0–3" required />
+                    </div>
 
-</div>
+                </div>
+            </section>
+
+            <section class="form-section">
+                <h2 class="section-title">Compensation</h2>
+                <div class="grid">
+
+                    <div class="field">
+                        <label for="DailyRate">Daily Rate</label>
+                        <input type="number" id="DailyRate" name="DailyRate" min="0" placeholder="e.g. 800" required />
+                    </div>
+
+                    <div class="field">
+                        <label for="HourlyRate">Hourly Rate</label>
+                        <input type="number" id="HourlyRate" name="HourlyRate" min="0" placeholder="e.g. 60" required />
+                    </div>
+
+                    <div class="field">
+                        <label for="MonthlyIncome">Monthly Income</label>
+                        <input type="number" id="MonthlyIncome" name="MonthlyIncome" min="0" placeholder="e.g. 5000"
+                            required />
+                    </div>
+
+                    <div class="field">
+                        <label for="MonthlyRate">Monthly Rate</label>
+                        <input type="number" id="MonthlyRate" name="MonthlyRate" min="0" placeholder="e.g. 14000"
+                            required />
+                    </div>
+
+                    <div class="field">
+                        <label for="PercentSalaryHike">Salary Hike <span class="hint">(%)</span></label>
+                        <input type="number" id="PercentSalaryHike" name="PercentSalaryHike" min="0"
+                            placeholder="e.g. 15" required />
+                    </div>
+
+                </div>
+            </section>
+
+            <section class="form-section">
+                <h2 class="section-title">Experience</h2>
+                <div class="grid">
+
+                    <div class="field">
+                        <label for="TotalWorkingYears">Total Working Years</label>
+                        <input type="number" id="TotalWorkingYears" name="TotalWorkingYears" min="0"
+                            placeholder="e.g. 10" required />
+                    </div>
+
+                    <div class="field">
+                        <label for="NumCompaniesWorked">Companies Worked</label>
+                        <input type="number" id="NumCompaniesWorked" name="NumCompaniesWorked" min="0"
+                            placeholder="e.g. 3" required />
+                    </div>
+
+                    <div class="field">
+                        <label for="YearsAtCompany">Years at Company</label>
+                        <input type="number" id="YearsAtCompany" name="YearsAtCompany" min="0" placeholder="e.g. 5"
+                            required />
+                    </div>
+
+                    <div class="field">
+                        <label for="YearsInCurrentRole">Years in Current Role</label>
+                        <input type="number" id="YearsInCurrentRole" name="YearsInCurrentRole" min="0"
+                            placeholder="e.g. 3" required />
+                    </div>
+
+                    <div class="field">
+                        <label for="YearsSinceLastPromotion">Years Since Last Promotion</label>
+                        <input type="number" id="YearsSinceLastPromotion" name="YearsSinceLastPromotion" min="0"
+                            placeholder="e.g. 1" required />
+                    </div>
+
+                    <div class="field">
+                        <label for="YearsWithCurrManager">Years With Current Manager</label>
+                        <input type="number" id="YearsWithCurrManager" name="YearsWithCurrManager" min="0"
+                            placeholder="e.g. 2" required />
+                    </div>
+
+                    <div class="field">
+                        <label for="TrainingTimesLastYear">Training Times Last Year</label>
+                        <input type="number" id="TrainingTimesLastYear" name="TrainingTimesLastYear" min="0"
+                            placeholder="e.g. 3" required />
+                    </div>
+
+                </div>
+            </section>
+
+            <div class="form-footer">
+                <button id="predict-btn" type="submit">Predict Attrition</button>
+            </div>
+
+        </form>
+
+        {% if prediction %}
+        <div class="result-card">
+            <p class="result-label">Prediction Result</p>
+            <p class="result-value">{{ prediction }}</p>
+        </div>
+        {% endif %}
+
+    </div>
 
 </body>
+
 </html>
