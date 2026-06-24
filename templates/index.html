@@ -19,6 +19,9 @@
         <header class="page-header">
             <h1>Attrition Predictor</h1>
             <p>Fill in the employee details below to assess attrition risk.</p>
+            {% if live_app_url and request.url_root.rstrip('/') != live_app_url.rstrip('/') %}
+            <p><a href="{{ live_app_url }}" target="_blank" rel="noopener noreferrer">View Live Application</a></p>
+            {% endif %}
         </header>
 
         <form class="card" action="/predict" method="POST">
